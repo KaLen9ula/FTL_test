@@ -6,4 +6,6 @@ class Expense < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :category, presence: true
+
+  scope :accessible_for, -> (user) { where(user:user) }
 end
