@@ -37,3 +37,5 @@ rails s
 ```
 rspec .
 ```
+
+Deployed app on heroku: [Expense controller app](https://expenses-controller-app.herokuapp.com/)
