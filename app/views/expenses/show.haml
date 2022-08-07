@@ -1,0 +1,30 @@
+.card.bg-light.mt-4.mx-auto.w-50
+  .card-header.bg-white
+    %b
+      Expense №#{@expense.id}, created #{time_ago_in_words(@expense.created_at)} ago
+  .card-body
+    %p.card-text
+      Title:
+      %b= @expense.title
+    %p.card-text
+      Description:
+      %b= @expense.description
+    %p.card-text
+      Category:
+      %b= @expense.category
+    %p.card-text
+      Amount: $
+      %b= @expense.amount
+    %p.card-text
+      Spent in:
+      %b= @expense.created_at
+  %p.mx-auto
+    - user_id = !user_signed_in? || current_user.id; if @expense.user_id == user_id then
+      %button.btn.btn-success.btn-sm{:onclick => "copyToClipboard()"} Copy link
+      = link_to  "Delete", expense_path(@expense), |
+          method: :delete,                            |
+          data: { confirm: 'Are you sure?'},          |
+        class: "btn btn-danger btn-sm"                |
+      = link_to " Edit", edit_expense_path(@expense), class: "btn btn-info btn-sm edit-icon"
+      = link_to "All expenses", expenses_path, class: "btn btn-secondary btn-sm"
+= javascript_include_tag "expenses.js"

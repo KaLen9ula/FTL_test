@@ -1,0 +1,26 @@
+.card.mt-4.mx-auto
+  .card-body.mb-10
+    %h3.card-title.text-center
+      Your expenses
+    .text-right
+      %a.btn.btn-success.add-new-icon{:href => new_expense_path} Add new
+    %table#expenses_table.table.mt-4
+      %thead
+        %tr{:role => "row"}
+          %th.sorting{"data-name" => "title"}= sortable "title"
+          %th.sorting{"data-name" => "description"}= sortable "description"
+          %th.sorting{"data-name" => "category"}= sortable "category"
+          %th.sorting{"data-name" => "amount"}= sortable "amount"
+          %th.sorting.sorting_desc{"data-name" => "created_at"}= sortable "created_at"
+          %th
+      %tbody#expenses
+        - @expenses.each_with_index do | expense, i |
+          = render partial: "index_expenses", locals: {expense: expense, i: i}
+    %table#spending.table
+      %tbody
+        %tr
+          %td Spending:
+          %td
+            Last Year: $#{count_year_spend}
+          %td
+            Last Month: $#{count_month_spend}

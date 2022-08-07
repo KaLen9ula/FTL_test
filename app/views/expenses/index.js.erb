@@ -1,0 +1,21 @@
+var direction = "<%= sort_direction %>";
+var opposite_direction = direction == "asc" ? "desc" : "asc";
+var sort_column = "<%= sort_column %>";
+
+$("#expenses > tr").remove();
+
+<% @expenses.each_with_index do | expense, i | %>
+$('#expenses').append("<%= j render('index_expenses', expense: expense, i: i) %>");
+<% end %>
+
+$("#expenses_table th.sorting_asc").removeClass("sorting_asc").addClass("sorting");
+$("#expenses_table th.sorting_desc").removeClass("sorting_desc").addClass("sorting");
+$(`#expenses_table th[data-name=${sort_column}]`).removeClass("sorting").addClass(`sorting_${direction}`);
+
+var links = $('#expenses_table th a');
+links.each(function (i, link) {
+    var col_name = $(link).parent().data('name');
+    var col_dir = sort_column == col_name ? opposite_direction : "asc";
+    var new_href = `/expenses?direction=${col_dir}&amp;sort=${col_name}&amp`;
+    $(link).attr('href', new_href);
+})

@@ -1,0 +1,25 @@
+= form_with(model: @expense, remote: true, class: "new-article-form") do |form|
+  - if user_signed_in?
+    = form.hidden_field :user_id, required: true, value: current_user.id, class: "form-control"
+  .card-body
+    = form.label :title
+    = form.text_field :title, required: true, class: "form-control"
+  .card-body
+    = form.label :description
+    = form.text_area :description, required: true, class: "form-control"
+  .card-body
+    = form.label :category
+    %br/
+    = form.select :category, options_for_select(Expense::CATEGORIES, form.object.category), |
+      {include_blank: true},                                                                      |
+      required: true, class: "custom-select"                                                      |
+  .card-body
+    = form.label :amount, required: true
+    $
+    \#{form.text_field :amount, class: "form-control", required: true}
+  .card-body
+    = form.label :spent_in, required: true
+    = form.text_field :created_at, required: true, class: "form-control", type: "date"
+  .card-body
+    = submit_tag "Submit", class: "btn btn-primary"
+    = link_to  "Cancel", expenses_path,  title: 'Click to remove', class: "btn btn-secondary cancel-icon"

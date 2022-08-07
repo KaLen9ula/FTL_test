@@ -1,0 +1,18 @@
+%tr
+  %td
+    %b
+      = link_to expense.title,                  |
+        expense,                                |
+        title: "Click to show more information" |
+      %b
+  %td.cursor-info{:title => expense.description}
+    = expense.description
+  %td= expense.category
+  %td
+    $#{expense.amount.round}
+  %td= expense.created_at.strftime("%B %d, %Y")
+  %td= link_to "Delete",                     |
+      expense,                               |
+      title: "Click to delete this expense", |
+      method: :delete,                       |
+      data: { confirm: 'Are you sure?' }     |

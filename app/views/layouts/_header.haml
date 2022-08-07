@@ -1,0 +1,16 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  %a.btn.btn-primary{:href => root_path} Expenses
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %form.form-inline.ml-auto
+      - if user_signed_in?
+        %a.btn.btn-primary{:href => edit_user_registration_path}
+          Edit profile
+        %a.btn.btn-primary.ml-2{:href => destroy_user_session_path, 'data-method': :delete}
+          Log Out
+      - else
+        %a.btn.btn-outline-secondary{:href => new_user_session_path}
+          Log In
+        %a.btn.btn-primary.ml-2{:href => new_user_registration_path}
+          Sign up
